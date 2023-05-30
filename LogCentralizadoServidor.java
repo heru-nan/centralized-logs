@@ -7,6 +7,8 @@ import java.rmi.server.UnicastRemoteObject;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.time.Instant;
+
 
 public class LogCentralizadoServidor extends UnicastRemoteObject implements LogCentralizadoInterface {
 
@@ -16,19 +18,13 @@ public class LogCentralizadoServidor extends UnicastRemoteObject implements LogC
     public LogCentralizadoServidor() throws RemoteException {
     }
 
-    @Override
+   @Override
     public synchronized void agregarLog(String clienteID, List<String> logs) throws RemoteException {
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-
         try (FileWriter fileWriter = new FileWriter(logCentralizado, true)) {
             for (String log : logs) {
-                LocalDateTime now = LocalDateTime.now();
-                String fecha = dateFormatter.format(now);
-                String hora = timeFormatter.format(now);
+                long timestamp = Instant.now().getEpochSecond();
 
-                correlativo++;
-                String entradaLog = String.format("%d;%s;%s;%s - %s%n", correlativo, fecha, hora, clienteID, log);
+                String entradaLog = String.format("%s;%d;%s%n", log, timestamp, clienteID);
                 fileWriter.write(entradaLog);
             }
         } catch (IOException e) {
