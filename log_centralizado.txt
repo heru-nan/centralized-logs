@@ -1,0 +1,10 @@
+7;2023-05-29;21:55:07;log_local1.txt - 1;2023-04-25;08:30:15;Inicio de la comunicación
+8;2023-05-29;21:55:07;log_local1.txt - 2;2023-04-25;08:32:00;Mensaje de prueba
+9;2023-05-29;21:55:07;log_local1.txt - 3;2023-04-25;08:35:10;Otra acción
+10;2023-05-29;21:55:19;log_local2.txt - 1;2023-04-25;08:30:15;Inicio de la comunicación
+11;2023-05-29;21:55:19;log_local2.txt - 2;2023-04-25;08:32:00;Mensaje de prueba
+12;2023-05-29;21:55:19;log_local2.txt - 3;2023-04-25;08:35:10;Otra acción
+13;2023-05-29;21:55:29;log_local3.txt - 1;2023-04-25;08:30:15;Inicio de la comunicación
+14;2023-05-29;21:55:29;log_local3.txt - 2;2023-04-25;08:32:00;Mensaje de prueba
+15;2023-05-29;21:55:29;log_local3.txt - 3;2023-04-25;08:35:10;Otra acción
+16;2023-05-29;21:57:24;log_local3.txt - 4;2023-04-25;08:35:10;Otra acción3

@@ -1,23 +1,38 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.io.*;
+import java.util.*;
 
 public class LogCentralizadoCron {
     private LogCentralizadoCliente cliente;
     private String logLocal;
     private int ultimaLineaEnviada;
+    private String estadoArchivo;
 
     public LogCentralizadoCron(String host, String logLocal) {
         this.logLocal = logLocal;
         this.cliente = new LogCentralizadoCliente(logLocal);
-        this.ultimaLineaEnviada = 0;
+        this.estadoArchivo = logLocal + ".estado";
+
         try {
             cliente.conectar(host, 1099);
+            cargarEstado();
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void cargarEstado() {
+        try (BufferedReader br = new BufferedReader(new FileReader(estadoArchivo))) {
+            String linea = br.readLine();
+            ultimaLineaEnviada = linea != null ? Integer.parseInt(linea) : 0;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void guardarEstado() {
+        try (PrintWriter pw = new PrintWriter(new FileWriter(estadoArchivo))) {
+            pw.println(ultimaLineaEnviada);
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -28,6 +43,7 @@ public class LogCentralizadoCron {
             @Override
             public void run() {
                 enviarLogs();
+                guardarEstado();
             }
         }, 0, intervalo * 1000);
     }

@@ -12,12 +12,12 @@ En otra terminal, levantar servidor
 
 En otra terminal, para ejecutar el cliente(s), hay que pasarle un archivo de logs local
 
-    java LogCentralizadoCron localhost log_local_1.txt
+    java LogCentralizadoCron localhost log_local1.txt
 
 En otra terminal,
 
-    java LogCentralizadoCron localhost log_local_2.txt
+    java LogCentralizadoCron localhost log_local2.txt
 
 En otra terminal,
 
-    java LogCentralizadoCron localhost log_local_3.txt
+    java LogCentralizadoCron localhost log_local3.txt
